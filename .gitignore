@@ -10,8 +10,9 @@ obj/
 *.sln.docstates
 .vs/
 .vscode/
-appsettings.Development.json
-# (Giữ lại appsettings.json làm mẫu)
+appsettings.json
+appsettings.*.json
+
 
 # [Frontend - Node/React]
 node_modules/
