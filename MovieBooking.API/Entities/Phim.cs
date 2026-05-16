@@ -26,5 +26,12 @@ namespace MovieBooking.API.Entities
         public DateTime NgayKhoiChieu { get; set; }
         
         public int DanhGia { get; set; }
+
+        [MaxLength(20)]
+        public string MaNhom { get; set; } = "GP01"; // Mặc định GP01 theo Cybersoft
+
+        public bool DangChieu { get; set; } = true;
+        public bool SapChieu { get; set; } = false;
+        public bool Hot { get; set; } = false; // Phim Hot để đưa lên Banner
     }
 }
