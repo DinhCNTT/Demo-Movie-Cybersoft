@@ -11,6 +11,7 @@ namespace MovieBooking.API.Data
         }
 
         public DbSet<Phim> Phims { get; set; }
+        public DbSet<Banner> Banners { get; set; }
         public DbSet<LoaiNguoiDung> LoaiNguoiDungs { get; set; }
         public DbSet<NguoiDung> NguoiDungs { get; set; }
 
@@ -39,6 +40,12 @@ namespace MovieBooking.API.Data
                 .HasForeignKey(n => n.MaLoaiNguoiDung)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<Banner>()
+                .HasOne(b => b.Phim)
+                .WithMany(p => p.Banners)
+                .HasForeignKey(b => b.MaPhim)
+                .OnDelete(DeleteBehavior.Cascade);
+
             // Add indexes
             modelBuilder.Entity<NguoiDung>()
                 .HasIndex(n => n.Email)
@@ -46,6 +53,9 @@ namespace MovieBooking.API.Data
 
             modelBuilder.Entity<Phim>()
                 .HasIndex(p => p.BiDanh);
+
+            modelBuilder.Entity<Phim>()
+                .HasIndex(p => p.NgayKhoiChieu);
         }
     }
 }

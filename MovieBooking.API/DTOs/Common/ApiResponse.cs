@@ -3,11 +3,11 @@ namespace MovieBooking.API.DTOs.Common
     public class ApiResponse<T>
     {
         public int StatusCode { get; set; }
-        public string Message { get; set; }
-        public T Content { get; set; }
+        public string Message { get; set; } = string.Empty;
+        public T? Content { get; set; }
         public DateTime DateTime { get; set; } = DateTime.Now;
 
-        public static ApiResponse<T> Success(T data, string message = "X? l? thành công")
+        public static ApiResponse<T> Success(T? data, string message = "Success")
         {
             return new ApiResponse<T>
             {

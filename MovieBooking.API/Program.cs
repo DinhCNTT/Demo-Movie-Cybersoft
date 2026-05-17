@@ -18,6 +18,8 @@ builder.Services.AddAutoMapper(typeof(Program));
 
 // Add Services
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IPhimService, PhimService>();
+builder.Services.AddScoped<IFileUploadService, FileUploadService>();
 
 // Add JWT Authentication
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");
@@ -114,6 +116,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// Enable Static Files for image uploads
+app.UseStaticFiles();
 
 app.UseCors("AllowAll");
 

@@ -1,16 +1,10 @@
-using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MovieBooking.API.Entities
+namespace MovieBooking.API.DTOs.Phim
 {
-    [Table("Phim")]
-    public class Phim
+    public class PhimCreateDto
     {
-        [Key]
-        public int MaPhim { get; set; }
-
-        [Required]
+        [Required(ErrorMessage = "Tên phim không ðý?c ð? tr?ng")]
         [StringLength(200)]
         public string TenPhim { get; set; }
 
@@ -23,12 +17,12 @@ namespace MovieBooking.API.Entities
         [StringLength(500)]
         public string? HinhAnh { get; set; }
 
-        [Column(TypeName = "nvarchar(max)")]
         public string? MoTa { get; set; }
 
+        [Required(ErrorMessage = "Ngày kh?i chi?u không ðý?c ð? tr?ng")]
         public DateTime NgayKhoiChieu { get; set; }
 
-        [Range(0, 10)]
+        [Range(0, 10, ErrorMessage = "Ðánh giá ph?i t? 0 ð?n 10")]
         public int DanhGia { get; set; }
 
         public bool Hot { get; set; }
@@ -36,8 +30,5 @@ namespace MovieBooking.API.Entities
         public bool DangChieu { get; set; }
 
         public bool SapChieu { get; set; }
-
-        // Navigation properties
-        public virtual ICollection<Banner>? Banners { get; set; }
     }
 }
