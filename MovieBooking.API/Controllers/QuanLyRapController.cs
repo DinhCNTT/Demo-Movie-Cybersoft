@@ -1,0 +1,71 @@
+using Microsoft.AspNetCore.Mvc;
+using MovieBooking.API.DTOs.Common;
+using MovieBooking.API.DTOs.Rap;
+using MovieBooking.API.Interfaces;
+
+namespace MovieBooking.API.Controllers
+{
+    [ApiController]
+    [Route("api/[controller]")]
+    public class QuanLyRapController : ControllerBase
+    {
+        private readonly IRapService _rapService;
+
+        public QuanLyRapController(IRapService rapService)
+        {
+            _rapService = rapService;
+        }
+
+        [HttpGet("LayThongTinHeThongRap")]
+        public async Task<IActionResult> LayThongTinHeThongRap(
+            [FromQuery] string maHeThongRap = "",
+            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft = "")
+        {
+            if (string.IsNullOrWhiteSpace(tokenCybersoft))
+                return BadRequest(ApiResponse<string>.Error("Thi?u TokenCybersoft"));
+
+            var data = await _rapService.LayThongTinHeThongRapAsync(maHeThongRap);
+            return Ok(ApiResponse<List<HeThongRapDto>>.Success(data, "Success"));
+        }
+
+        [HttpGet("LayThongTinCumRapTheoHeThong")]
+        public async Task<IActionResult> LayThongTinCumRapTheoHeThong(
+            [FromQuery] string maHeThongRap = "",
+            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft = "")
+        {
+            if (string.IsNullOrWhiteSpace(tokenCybersoft))
+                return BadRequest(ApiResponse<string>.Error("Thi?u TokenCybersoft"));
+
+            var data = await _rapService.LayThongTinCumRapTheoHeThongAsync(maHeThongRap);
+            return Ok(ApiResponse<List<HeThongRapCumRapDto>>.Success(data, "Success"));
+        }
+
+        [HttpGet("LayThongTinLichChieuHeThongRap")]
+        public async Task<IActionResult> LayThongTinLichChieuHeThongRap(
+            [FromQuery] string maHeThongRap = "",
+            [FromQuery] string maNhom = "GP01",
+            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft = "")
+        {
+            if (string.IsNullOrWhiteSpace(tokenCybersoft))
+                return BadRequest(ApiResponse<string>.Error("Thi?u TokenCybersoft"));
+
+            var data = await _rapService.LayThongTinLichChieuHeThongRapAsync(maHeThongRap, maNhom);
+            return Ok(ApiResponse<List<HeThongRapLichChieuDto>>.Success(data, "Success"));
+        }
+
+        [HttpGet("LayThongTinLichChieuPhim")]
+        public async Task<IActionResult> LayThongTinLichChieuPhim(
+            [FromQuery(Name = "MaPhim")] int maPhim = 0,
+            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft = "")
+        {
+            if (string.IsNullOrWhiteSpace(tokenCybersoft))
+                return BadRequest(ApiResponse<string>.Error("Thi?u TokenCybersoft"));
+
+            var data = await _rapService.LayThongTinLichChieuPhimAsync(maPhim);
+            if (data == null)
+                return NotFound(ApiResponse<string>.Error("Không t?m th?y phim", 404));
+
+            return Ok(ApiResponse<ThongTinLichChieuPhimDto>.Success(data, "Success"));
+        }
+    }
+}
