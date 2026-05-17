@@ -18,8 +18,8 @@ namespace MovieBooking.API.Controllers
 
         [HttpGet("LayThongTinHeThongRap")]
         public async Task<IActionResult> LayThongTinHeThongRap(
-            [FromQuery] string maHeThongRap = "",
-            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft = "")
+            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft,
+            [FromQuery] string maHeThongRap = "")
         {
             if (string.IsNullOrWhiteSpace(tokenCybersoft))
                 return BadRequest(ApiResponse<string>.Error("Thi?u TokenCybersoft"));
@@ -30,8 +30,8 @@ namespace MovieBooking.API.Controllers
 
         [HttpGet("LayThongTinCumRapTheoHeThong")]
         public async Task<IActionResult> LayThongTinCumRapTheoHeThong(
-            [FromQuery] string maHeThongRap = "",
-            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft = "")
+            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft,
+            [FromQuery] string maHeThongRap = "")
         {
             if (string.IsNullOrWhiteSpace(tokenCybersoft))
                 return BadRequest(ApiResponse<string>.Error("Thi?u TokenCybersoft"));
@@ -42,9 +42,9 @@ namespace MovieBooking.API.Controllers
 
         [HttpGet("LayThongTinLichChieuHeThongRap")]
         public async Task<IActionResult> LayThongTinLichChieuHeThongRap(
+            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft,
             [FromQuery] string maHeThongRap = "",
-            [FromQuery] string maNhom = "GP01",
-            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft = "")
+            [FromQuery] string maNhom = "GP01")
         {
             if (string.IsNullOrWhiteSpace(tokenCybersoft))
                 return BadRequest(ApiResponse<string>.Error("Thi?u TokenCybersoft"));
@@ -55,8 +55,8 @@ namespace MovieBooking.API.Controllers
 
         [HttpGet("LayThongTinLichChieuPhim")]
         public async Task<IActionResult> LayThongTinLichChieuPhim(
-            [FromQuery(Name = "MaPhim")] int maPhim = 0,
-            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft = "")
+            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft,
+            [FromQuery(Name = "MaPhim")] int maPhim = 0)
         {
             if (string.IsNullOrWhiteSpace(tokenCybersoft))
                 return BadRequest(ApiResponse<string>.Error("Thi?u TokenCybersoft"));

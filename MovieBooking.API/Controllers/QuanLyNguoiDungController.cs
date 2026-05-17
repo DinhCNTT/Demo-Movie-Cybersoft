@@ -25,7 +25,7 @@ namespace MovieBooking.API.Controllers
         }
 
         [HttpGet("LayDanhSachLoaiNguoiDung")]
-        public async Task<IActionResult> LayDanhSachLoaiNguoiDung([FromHeader(Name = "TokenCybersoft")] string tokenCybersoft = "")
+        public async Task<IActionResult> LayDanhSachLoaiNguoiDung([FromHeader(Name = "TokenCybersoft")] string tokenCybersoft)
         {
             if (string.IsNullOrWhiteSpace(tokenCybersoft)) return BadRequest(ApiResponse<string>.Error("Thiếu TokenCybersoft"));
             var data = await _context.LoaiNguoiDungs.ToListAsync();
@@ -38,7 +38,7 @@ namespace MovieBooking.API.Controllers
         [HttpPost("DangNhap")]
         public async Task<IActionResult> DangNhap(
             [FromBody] ThongTinDangNhapVM ndDN,
-            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft = "")
+            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft)
         {
             if (string.IsNullOrWhiteSpace(tokenCybersoft)) return BadRequest(ApiResponse<string>.Error("Thiếu TokenCybersoft"));
 
@@ -69,7 +69,7 @@ namespace MovieBooking.API.Controllers
         [HttpPost("DangKy")]
         public async Task<IActionResult> DangKy(
             [FromBody] NguoiDung_VM nd,
-            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft = "")
+            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft)
         {
             if (string.IsNullOrWhiteSpace(tokenCybersoft)) return BadRequest(ApiResponse<string>.Error("Thiếu TokenCybersoft"));
 
@@ -92,9 +92,9 @@ namespace MovieBooking.API.Controllers
 
         [HttpGet("LayDanhSachNguoiDung")]
         public async Task<IActionResult> LayDanhSachNguoiDung(
+            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft,
             [FromQuery] string MaNhom = "GP01",
-            [FromQuery] string tuKhoa = "",
-            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft = "")
+            [FromQuery] string tuKhoa = "")
         {
             if (string.IsNullOrWhiteSpace(tokenCybersoft)) return BadRequest(ApiResponse<string>.Error("Thiếu TokenCybersoft"));
 
@@ -111,11 +111,11 @@ namespace MovieBooking.API.Controllers
 
         [HttpGet("LayDanhSachNguoiDungPhanTrang")]
         public async Task<IActionResult> LayDanhSachNguoiDungPhanTrang(
+            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft,
             [FromQuery] string MaNhom = "GP01",
             [FromQuery] string tuKhoa = "",
             [FromQuery] int soTrang = 1,
-            [FromQuery] int soPhanTuTrenTrang = 20,
-            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft = "")
+            [FromQuery] int soPhanTuTrenTrang = 20)
         {
             if (string.IsNullOrWhiteSpace(tokenCybersoft)) return BadRequest(ApiResponse<string>.Error("Thiếu TokenCybersoft"));
 
@@ -141,25 +141,25 @@ namespace MovieBooking.API.Controllers
 
         [HttpGet("TimKiemNguoiDung")]
         public Task<IActionResult> TimKiemNguoiDung(
+            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft,
             [FromQuery] string MaNhom = "GP01",
-            [FromQuery] string tuKhoa = "",
-            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft = "")
-            => LayDanhSachNguoiDung(MaNhom, tuKhoa, tokenCybersoft);
+            [FromQuery] string tuKhoa = "")
+            => LayDanhSachNguoiDung(tokenCybersoft, MaNhom, tuKhoa);
 
         [HttpGet("TimKiemNguoiDungPhanTrang")]
         public Task<IActionResult> TimKiemNguoiDungPhanTrang(
+            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft,
             [FromQuery] string MaNhom = "GP01",
             [FromQuery] string tuKhoa = "",
             [FromQuery] int soTrang = 1,
-            [FromQuery] int soPhanTuTrenTrang = 1,
-            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft = "")
-            => LayDanhSachNguoiDungPhanTrang(MaNhom, tuKhoa, soTrang, soPhanTuTrenTrang, tokenCybersoft);
+            [FromQuery] int soPhanTuTrenTrang = 1)
+            => LayDanhSachNguoiDungPhanTrang(tokenCybersoft, MaNhom, tuKhoa, soTrang, soPhanTuTrenTrang);
 
         [Authorize]
         [HttpPost("ThongTinTaiKhoan")]
         public async Task<IActionResult> ThongTinTaiKhoan(
-            [FromHeader(Name = "Authorization")] string authorization = "",
-            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft = "")
+            [FromHeader(Name = "Authorization")] string authorization,
+            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft)
         {
             if (string.IsNullOrWhiteSpace(tokenCybersoft)) return BadRequest(ApiResponse<string>.Error("Thiếu TokenCybersoft"));
 
@@ -175,9 +175,9 @@ namespace MovieBooking.API.Controllers
         [Authorize]
         [HttpPost("LayThongTinNguoiDung")]
         public async Task<IActionResult> LayThongTinNguoiDung(
-            [FromQuery] string taiKhoan = "",
-            [FromHeader(Name = "Authorization")] string authorization = "",
-            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft = "")
+            [FromHeader(Name = "Authorization")] string authorization,
+            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft,
+            [FromQuery] string taiKhoan = "")
         {
             if (string.IsNullOrWhiteSpace(tokenCybersoft)) return BadRequest(ApiResponse<string>.Error("Thiếu TokenCybersoft"));
             if (string.IsNullOrWhiteSpace(taiKhoan)) return BadRequest(ApiResponse<string>.Error("Thiếu tài khoản"));
@@ -192,8 +192,8 @@ namespace MovieBooking.API.Controllers
         [HttpPost("ThemNguoiDung")]
         public async Task<IActionResult> ThemNguoiDung(
             [FromBody] NguoiDungVM nd,
-            [FromHeader(Name = "Authorization")] string authorization = "",
-            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft = "")
+            [FromHeader(Name = "Authorization")] string authorization,
+            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft)
         {
             if (string.IsNullOrWhiteSpace(tokenCybersoft)) return BadRequest(ApiResponse<string>.Error("Thiếu TokenCybersoft"));
 
@@ -218,8 +218,8 @@ namespace MovieBooking.API.Controllers
         [HttpPut("CapNhatThongTinNguoiDung")]
         public async Task<IActionResult> CapNhatThongTinNguoiDung(
             [FromBody] NguoiDungVM nd,
-            [FromHeader(Name = "Authorization")] string authorization = "",
-            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft = "")
+            [FromHeader(Name = "Authorization")] string authorization,
+            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft)
         {
             if (string.IsNullOrWhiteSpace(tokenCybersoft)) return BadRequest(ApiResponse<string>.Error("Thiếu TokenCybersoft"));
 
@@ -245,16 +245,16 @@ namespace MovieBooking.API.Controllers
         [HttpPost("CapNhatThongTinNguoiDung")]
         public Task<IActionResult> CapNhat(
             [FromBody] NguoiDungVM nd,
-            [FromHeader(Name = "Authorization")] string authorization = "",
-            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft = "")
+            [FromHeader(Name = "Authorization")] string authorization,
+            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft)
             => CapNhatThongTinNguoiDung(nd, authorization, tokenCybersoft);
 
         [Authorize(Roles = "QuanTri")]
         [HttpDelete("XoaNguoiDung")]
         public async Task<IActionResult> XoaNguoiDung(
-            [FromQuery(Name = "TaiKhoan")] string taiKhoan = "",
-            [FromHeader(Name = "Authorization")] string authorization = "",
-            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft = "")
+            [FromHeader(Name = "Authorization")] string authorization,
+            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft,
+            [FromQuery(Name = "TaiKhoan")] string taiKhoan = "")
         {
             if (string.IsNullOrWhiteSpace(tokenCybersoft)) return BadRequest(ApiResponse<string>.Error("Thiếu TokenCybersoft"));
             if (string.IsNullOrWhiteSpace(taiKhoan)) return BadRequest(ApiResponse<string>.Error("Thiếu tài khoản"));

@@ -29,9 +29,9 @@ namespace MovieBooking.API.Controllers
 
         [HttpGet("LayDanhSachPhim")]
         public async Task<IActionResult> LayDanhSachPhim(
+            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft,
             [FromQuery] string maNhom = "GP01",
-            [FromQuery] string tenPhim = "",
-            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft = "")
+            [FromQuery] string tenPhim = "")
         {
             if (string.IsNullOrWhiteSpace(tokenCybersoft)) return BadRequest(ApiResponse<string>.Error("Thi?u TokenCybersoft"));
 
@@ -42,11 +42,11 @@ namespace MovieBooking.API.Controllers
 
         [HttpGet("LayDanhSachPhimPhanTrang")]
         public async Task<IActionResult> LayDanhSachPhimPhanTrang(
+            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft,
             [FromQuery] string maNhom = "GP01",
             [FromQuery] string tenPhim = "",
             [FromQuery] int soTrang = 1,
-            [FromQuery] int soPhanTuTrenTrang = 10,
-            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft = "")
+            [FromQuery] int soPhanTuTrenTrang = 10)
         {
             if (string.IsNullOrWhiteSpace(tokenCybersoft)) return BadRequest(ApiResponse<string>.Error("Thi?u TokenCybersoft"));
 
@@ -56,13 +56,13 @@ namespace MovieBooking.API.Controllers
 
         [HttpGet("LayDanhSachPhimTheoNgay")]
         public async Task<IActionResult> LayDanhSachPhimTheoNgay(
+            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft,
             [FromQuery] string maNhom = "GP01",
             [FromQuery] string tenPhim = "",
             [FromQuery] int soTrang = 1,
             [FromQuery] int soPhanTuTrenTrang = 10,
             [FromQuery] string tuNgay = "",
-            [FromQuery] string denNgay = "",
-            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft = "")
+            [FromQuery] string denNgay = "")
         {
             if (string.IsNullOrWhiteSpace(tokenCybersoft)) return BadRequest(ApiResponse<string>.Error("Thi?u TokenCybersoft"));
 
@@ -93,7 +93,7 @@ namespace MovieBooking.API.Controllers
         [Consumes("multipart/form-data")]
         public async Task<IActionResult> ThemPhimUploadHinh(
             [FromForm] PhimUploadCreateDto frm,
-            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft = "")
+            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft)
         {
             if (string.IsNullOrWhiteSpace(tokenCybersoft)) return BadRequest(ApiResponse<string>.Error("Thi?u TokenCybersoft"));
 
@@ -123,8 +123,8 @@ namespace MovieBooking.API.Controllers
         [Consumes("multipart/form-data")]
         public async Task<IActionResult> CapNhatPhimUpload(
             [FromForm] PhimUploadUpdateDto frm,
-            [FromHeader(Name = "Authorization")] string authorization = "",
-            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft = "")
+            [FromHeader(Name = "Authorization")] string authorization,
+            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft)
         {
             if (string.IsNullOrWhiteSpace(tokenCybersoft)) return BadRequest(ApiResponse<string>.Error("Thi?u TokenCybersoft"));
 
@@ -158,7 +158,7 @@ namespace MovieBooking.API.Controllers
             IFormFile? file,
             [FromQuery] string? tenPhim,
             [FromQuery] string? maNhom,
-            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft = "")
+            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft)
         {
             if (string.IsNullOrWhiteSpace(tokenCybersoft)) return BadRequest(ApiResponse<string>.Error("Thi?u TokenCybersoft"));
             if (file == null) return BadRequest(ApiResponse<string>.Error("File không h?p l?"));
@@ -170,9 +170,9 @@ namespace MovieBooking.API.Controllers
         [Authorize]
         [HttpDelete("XP")]
         public async Task<IActionResult> XP(
-            [FromQuery(Name = "MaPhim")] int maPhim = 0,
-            [FromHeader(Name = "Authorization")] string authorization = "",
-            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft = "")
+            [FromHeader(Name = "Authorization")] string authorization,
+            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft,
+            [FromQuery(Name = "MaPhim")] int maPhim = 0)
         {
             if (string.IsNullOrWhiteSpace(tokenCybersoft)) return BadRequest(ApiResponse<string>.Error("Thi?u TokenCybersoft"));
             var deleted = await _phimService.DeletePhimAsync(maPhim);
@@ -183,9 +183,9 @@ namespace MovieBooking.API.Controllers
         [Authorize]
         [HttpDelete("XoaPhim")]
         public async Task<IActionResult> XoaPhim(
-            [FromQuery(Name = "MaPhim")] int maPhim = 0,
-            [FromHeader(Name = "Authorization")] string authorization = "",
-            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft = "")
+            [FromHeader(Name = "Authorization")] string authorization,
+            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft,
+            [FromQuery(Name = "MaPhim")] int maPhim = 0)
         {
             if (string.IsNullOrWhiteSpace(tokenCybersoft)) return BadRequest(ApiResponse<string>.Error("Thi?u TokenCybersoft"));
             var deleted = await _phimService.DeletePhimAsync(maPhim);
@@ -195,8 +195,8 @@ namespace MovieBooking.API.Controllers
 
         [HttpGet("LayThongTinPhim")]
         public async Task<IActionResult> LayThongTinPhim(
-            [FromQuery(Name = "MaPhim")] int maPhim = 0,
-            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft = "")
+            [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft,
+            [FromQuery(Name = "MaPhim")] int maPhim = 0)
         {
             if (string.IsNullOrWhiteSpace(tokenCybersoft)) return BadRequest(ApiResponse<string>.Error("Thi?u TokenCybersoft"));
             var phim = await _phimService.GetPhimByIdAsync(maPhim);

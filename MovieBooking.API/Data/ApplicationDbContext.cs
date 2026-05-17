@@ -18,6 +18,8 @@ namespace MovieBooking.API.Data
         public DbSet<CumRap> CumRaps { get; set; }
         public DbSet<RapPhim> RapPhims { get; set; }
         public DbSet<LichChieu> LichChieus { get; set; }
+        public DbSet<Ghe> Ghes { get; set; }
+        public DbSet<Ve> Ves { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -74,6 +76,24 @@ namespace MovieBooking.API.Data
                 .HasForeignKey(l => l.MaRap)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<Ghe>()
+                .HasOne(g => g.RapPhim)
+                .WithMany()
+                .HasForeignKey(g => g.MaRap)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Ve>()
+                .HasOne(v => v.LichChieu)
+                .WithMany()
+                .HasForeignKey(v => v.MaLichChieu)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Ve>()
+                .HasOne(v => v.Ghe)
+                .WithMany(g => g.Ves)
+                .HasForeignKey(v => v.MaGhe)
+                .OnDelete(DeleteBehavior.NoAction);
+
             // Add indexes
             modelBuilder.Entity<NguoiDung>()
                 .HasIndex(n => n.Email)
@@ -84,6 +104,10 @@ namespace MovieBooking.API.Data
 
             modelBuilder.Entity<Phim>()
                 .HasIndex(p => p.NgayKhoiChieu);
+
+            modelBuilder.Entity<Ve>()
+                .HasIndex(v => new { v.MaLichChieu, v.MaGhe })
+                .IsUnique();
 
             modelBuilder.Entity<HeThongRap>().HasData(
                 new HeThongRap
@@ -132,6 +156,17 @@ namespace MovieBooking.API.Data
                     TenRap = "R?p 2",
                     MaCumRap = "cgv-su-van-hanh"
                 }
+            );
+
+            modelBuilder.Entity<Ghe>().HasData(
+                new Ghe { MaGhe = 1, TenGhe = "01", LoaiGhe = "Thuong", MaRap = "rap-001" },
+                new Ghe { MaGhe = 2, TenGhe = "02", LoaiGhe = "Thuong", MaRap = "rap-001" },
+                new Ghe { MaGhe = 3, TenGhe = "03", LoaiGhe = "Vip", MaRap = "rap-001" },
+                new Ghe { MaGhe = 4, TenGhe = "04", LoaiGhe = "Vip", MaRap = "rap-001" },
+                new Ghe { MaGhe = 5, TenGhe = "01", LoaiGhe = "Thuong", MaRap = "rap-002" },
+                new Ghe { MaGhe = 6, TenGhe = "02", LoaiGhe = "Thuong", MaRap = "rap-002" },
+                new Ghe { MaGhe = 7, TenGhe = "03", LoaiGhe = "Vip", MaRap = "rap-002" },
+                new Ghe { MaGhe = 8, TenGhe = "04", LoaiGhe = "Vip", MaRap = "rap-002" }
             );
         }
     }
