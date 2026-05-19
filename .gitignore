@@ -2,7 +2,7 @@
 
 # [Backend - .NET Core]
 bin/
-obj/
+obj/    
 [Dd]ebug/
 [Rr]elease/
 *.user
@@ -23,6 +23,7 @@ dist-ssr/
 .stylelintcache
 .prettiercache
 package-lock.json
+.env
 # (Giữ lại package.json)
 
 # [Hệ điều hành]
