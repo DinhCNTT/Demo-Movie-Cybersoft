@@ -1,30 +1,30 @@
-using System.ComponentModel.DataAnnotations;
+ï»¿using System.ComponentModel.DataAnnotations;
 
 namespace MovieBooking.API.DTOs.Auth
 {
     public class RegisterRequestDto
     {
-        [Required(ErrorMessage = "Tài kho?n không ğı?c ğ? tr?ng")]
+        [Required(ErrorMessage = "TÃ i khoáº£n khÃ´ng Ä‘Æ°á»£c Ä‘á»ƒ trá»‘ng")]
         [StringLength(50)]
         public string TaiKhoan { get; set; }
 
-        [Required(ErrorMessage = "M?t kh?u không ğı?c ğ? tr?ng")]
+        [Required(ErrorMessage = "Máº­t kháº©u khÃ´ng Ä‘Æ°á»£c Ä‘á»ƒ trá»‘ng")]
         [StringLength(255)]
         public string MatKhau { get; set; }
 
-        [Required(ErrorMessage = "Email không ğı?c ğ? tr?ng")]
-        [EmailAddress(ErrorMessage = "Email không ğúng ğ?nh d?ng")]
+        [Required(ErrorMessage = "Email khÃ´ng Ä‘Æ°á»£c Ä‘á»ƒ trá»‘ng")]
+        [EmailAddress(ErrorMessage = "Email khÃ´ng Ä‘Ãºng Ä‘á»‹nh dáº¡ng")]
         [StringLength(255)]
         public string Email { get; set; }
 
         [StringLength(20)]
         public string SoDt { get; set; }
 
-        [Required(ErrorMessage = "M? nhóm không ğı?c ğ? tr?ng")]
+        [Required(ErrorMessage = "MÃ£ nhÃ³m khÃ´ng Ä‘Æ°á»£c Ä‘á»ƒ trá»‘ng")]
         [StringLength(20)]
         public string MaNhom { get; set; }
 
-        [Required(ErrorMessage = "H? tên không ğı?c ğ? tr?ng")]
+        [Required(ErrorMessage = "Há» tÃªn khÃ´ng Ä‘Æ°á»£c Ä‘á»ƒ trá»‘ng")]
         [StringLength(100)]
         public string HoTen { get; set; }
     }

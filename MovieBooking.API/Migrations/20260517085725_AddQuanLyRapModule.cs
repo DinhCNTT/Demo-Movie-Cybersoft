@@ -109,7 +109,7 @@ namespace MovieBooking.API.Migrations
                 values: new object[,]
                 {
                     { "bhd-star-bitexco", "L3-Bitexco Icon 68, 2 Hai Trieu, Q1", "BHDStar", "BHD Star Bitexco" },
-                    { "cgv-su-van-hanh", "T?ng 6 V?n H?nh Mall, Qu?n 10", "CGV", "CGV Sư V?n H?nh" }
+                    { "cgv-su-van-hanh", "Tầng 6 Vạn Hạnh Mall, Quận 10", "CGV", "CGV Sư Vạn Hạnh" }
                 });
 
             migrationBuilder.InsertData(
@@ -117,8 +117,8 @@ namespace MovieBooking.API.Migrations
                 columns: new[] { "MaRap", "MaCumRap", "TenRap" },
                 values: new object[,]
                 {
-                    { "rap-001", "bhd-star-bitexco", "R?p 1" },
-                    { "rap-002", "cgv-su-van-hanh", "R?p 2" }
+                    { "rap-001", "bhd-star-bitexco", "Rạp 1" },
+                    { "rap-002", "cgv-su-van-hanh", "Rạp 2" }
                 });
 
             migrationBuilder.CreateIndex(

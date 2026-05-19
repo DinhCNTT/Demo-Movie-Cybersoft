@@ -83,9 +83,9 @@ namespace MovieBooking.API.Migrations
                         new
                         {
                             MaCumRap = "cgv-su-van-hanh",
-                            DiaChi = "T?ng 6 V?n H?nh Mall, Qu?n 10",
+                            DiaChi = "Tầng 6 Vạn Hạnh Mall, Quận 10",
                             MaHeThongRap = "CGV",
-                            TenCumRap = "CGV Sư V?n H?nh"
+                            TenCumRap = "CGV Sư Vạn Hạnh"
                         });
                 });
 
@@ -269,7 +269,7 @@ namespace MovieBooking.API.Migrations
                         new
                         {
                             MaLoaiNguoiDung = "QuanTri",
-                            TenLoai = "Qu?n Tr?"
+                            TenLoai = "Quản Trị"
                         },
                         new
                         {
@@ -403,13 +403,13 @@ namespace MovieBooking.API.Migrations
                         {
                             MaRap = "rap-001",
                             MaCumRap = "bhd-star-bitexco",
-                            TenRap = "R?p 1"
+                            TenRap = "Rạp 1"
                         },
                         new
                         {
                             MaRap = "rap-002",
                             MaCumRap = "cgv-su-van-hanh",
-                            TenRap = "R?p 2"
+                            TenRap = "Rạp 2"
                         });
                 });
 

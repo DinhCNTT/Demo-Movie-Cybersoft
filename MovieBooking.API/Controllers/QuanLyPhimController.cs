@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Authorization;
+Ôªøusing Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MovieBooking.API.DTOs.Common;
 using MovieBooking.API.DTOs.Phim;
@@ -22,9 +22,9 @@ namespace MovieBooking.API.Controllers
         [HttpGet("LayDanhSachBanner")]
         public async Task<IActionResult> LayDanhSachBanner([FromHeader(Name = "TokenCybersoft")] string tokenCybersoft)
         {
-            if (string.IsNullOrWhiteSpace(tokenCybersoft)) return BadRequest(ApiResponse<string>.Error("Thi?u TokenCybersoft"));
+            if (string.IsNullOrWhiteSpace(tokenCybersoft)) return BadRequest(ApiResponse<string>.Error("Thi·∫øu TokenCybersoft"));
             var banners = await _phimService.GetBannersAsync();
-            return Ok(ApiResponse<List<BannerDto>>.Success(banners, "L?y danh s·ch banner th‡nh cÙng"));
+            return Ok(ApiResponse<List<BannerDto>>.Success(banners, "L·∫•y danh s√°ch banner th√†nh c√¥ng"));
         }
 
         [HttpGet("LayDanhSachPhim")]
@@ -33,11 +33,11 @@ namespace MovieBooking.API.Controllers
             [FromQuery] string maNhom = "GP01",
             [FromQuery] string tenPhim = "")
         {
-            if (string.IsNullOrWhiteSpace(tokenCybersoft)) return BadRequest(ApiResponse<string>.Error("Thi?u TokenCybersoft"));
+            if (string.IsNullOrWhiteSpace(tokenCybersoft)) return BadRequest(ApiResponse<string>.Error("Thi·∫øu TokenCybersoft"));
 
             var phims = await _phimService.GetAllPhimsAsync();
             var filtered = phims.Where(p => string.IsNullOrWhiteSpace(tenPhim) || p.TenPhim.Contains(tenPhim, StringComparison.OrdinalIgnoreCase)).ToList();
-            return Ok(ApiResponse<List<PhimDto>>.Success(filtered, "L?y danh s·ch phim th‡nh cÙng"));
+            return Ok(ApiResponse<List<PhimDto>>.Success(filtered, "L·∫•y danh s√°ch phim th√†nh c√¥ng"));
         }
 
         [HttpGet("LayDanhSachPhimPhanTrang")]
@@ -48,10 +48,10 @@ namespace MovieBooking.API.Controllers
             [FromQuery] int soTrang = 1,
             [FromQuery] int soPhanTuTrenTrang = 10)
         {
-            if (string.IsNullOrWhiteSpace(tokenCybersoft)) return BadRequest(ApiResponse<string>.Error("Thi?u TokenCybersoft"));
+            if (string.IsNullOrWhiteSpace(tokenCybersoft)) return BadRequest(ApiResponse<string>.Error("Thi·∫øu TokenCybersoft"));
 
             var result = await _phimService.GetPhimsPaginationAsync(soTrang, soPhanTuTrenTrang, tenPhim);
-            return Ok(ApiResponse<PagedResult<PhimDto>>.Success(result, "L?y danh s·ch phim ph‚n trang th‡nh cÙng"));
+            return Ok(ApiResponse<PagedResult<PhimDto>>.Success(result, "L·∫•y danh s√°ch phim ph√¢n trang th√†nh c√¥ng"));
         }
 
         [HttpGet("LayDanhSachPhimTheoNgay")]
@@ -64,7 +64,7 @@ namespace MovieBooking.API.Controllers
             [FromQuery] string tuNgay = "",
             [FromQuery] string denNgay = "")
         {
-            if (string.IsNullOrWhiteSpace(tokenCybersoft)) return BadRequest(ApiResponse<string>.Error("Thi?u TokenCybersoft"));
+            if (string.IsNullOrWhiteSpace(tokenCybersoft)) return BadRequest(ApiResponse<string>.Error("Thi·∫øu TokenCybersoft"));
 
             DateTime? fromDate = DateTime.TryParse(tuNgay, out var fromValue) ? fromValue : null;
             DateTime? toDate = DateTime.TryParse(denNgay, out var toValue) ? toValue : null;
@@ -86,7 +86,7 @@ namespace MovieBooking.API.Controllers
                 Items = items
             };
 
-            return Ok(ApiResponse<PagedResult<PhimDto>>.Success(paged, "L?y danh s·ch phim theo ng‡y th‡nh cÙng"));
+            return Ok(ApiResponse<PagedResult<PhimDto>>.Success(paged, "L·∫•y danh s√°ch phim theo ng√†y th√†nh c√¥ng"));
         }
 
         [HttpPost("ThemPhimUploadHinh")]
@@ -95,7 +95,7 @@ namespace MovieBooking.API.Controllers
             [FromForm] PhimUploadCreateDto frm,
             [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft)
         {
-            if (string.IsNullOrWhiteSpace(tokenCybersoft)) return BadRequest(ApiResponse<string>.Error("Thi?u TokenCybersoft"));
+            if (string.IsNullOrWhiteSpace(tokenCybersoft)) return BadRequest(ApiResponse<string>.Error("Thi·∫øu TokenCybersoft"));
 
             var createDto = new PhimCreateDto
             {
@@ -115,7 +115,7 @@ namespace MovieBooking.API.Controllers
             }
 
             var phim = await _phimService.CreatePhimAsync(createDto);
-            return Ok(ApiResponse<PhimDto>.Success(phim, "ThÍm phim th‡nh cÙng"));
+            return Ok(ApiResponse<PhimDto>.Success(phim, "Th√™m phim th√†nh c√¥ng"));
         }
 
         [Authorize]
@@ -126,7 +126,7 @@ namespace MovieBooking.API.Controllers
             [FromHeader(Name = "Authorization")] string authorization,
             [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft)
         {
-            if (string.IsNullOrWhiteSpace(tokenCybersoft)) return BadRequest(ApiResponse<string>.Error("Thi?u TokenCybersoft"));
+            if (string.IsNullOrWhiteSpace(tokenCybersoft)) return BadRequest(ApiResponse<string>.Error("Thi·∫øu TokenCybersoft"));
 
             var updateDto = new PhimUpdateDto
             {
@@ -147,9 +147,9 @@ namespace MovieBooking.API.Controllers
             }
 
             var phim = await _phimService.UpdatePhimAsync(updateDto);
-            if (phim == null) return NotFound(ApiResponse<string>.Error("KhÙng t?m th?y phim", 404));
+            if (phim == null) return NotFound(ApiResponse<string>.Error("Kh√¥ng t√¨m th·∫•y phim", 404));
 
-            return Ok(ApiResponse<PhimDto>.Success(phim, "C?p nh?t phim th‡nh cÙng"));
+            return Ok(ApiResponse<PhimDto>.Success(phim, "C·∫≠p nh·∫≠t phim th√†nh c√¥ng"));
         }
 
         [HttpPost]
@@ -160,8 +160,8 @@ namespace MovieBooking.API.Controllers
             [FromQuery] string? maNhom,
             [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft)
         {
-            if (string.IsNullOrWhiteSpace(tokenCybersoft)) return BadRequest(ApiResponse<string>.Error("Thi?u TokenCybersoft"));
-            if (file == null) return BadRequest(ApiResponse<string>.Error("File khÙng h?p l?"));
+            if (string.IsNullOrWhiteSpace(tokenCybersoft)) return BadRequest(ApiResponse<string>.Error("Thi·∫øu TokenCybersoft"));
+            if (file == null) return BadRequest(ApiResponse<string>.Error("File kh√¥ng h·ª£p l·ªá"));
 
             var path = await _fileUploadService.UploadImageAsync(file, "images/phim");
             return Ok(path);
@@ -174,10 +174,10 @@ namespace MovieBooking.API.Controllers
             [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft,
             [FromQuery(Name = "MaPhim")] int maPhim = 0)
         {
-            if (string.IsNullOrWhiteSpace(tokenCybersoft)) return BadRequest(ApiResponse<string>.Error("Thi?u TokenCybersoft"));
+            if (string.IsNullOrWhiteSpace(tokenCybersoft)) return BadRequest(ApiResponse<string>.Error("Thi·∫øu TokenCybersoft"));
             var deleted = await _phimService.DeletePhimAsync(maPhim);
-            if (!deleted) return NotFound(ApiResponse<string>.Error("KhÙng t?m th?y phim", 404));
-            return Ok(ApiResponse<string>.Success("XP th‡nh cÙng", "Success"));
+            if (!deleted) return NotFound(ApiResponse<string>.Error("Kh√¥ng t√¨m th·∫•y phim", 404));
+            return Ok(ApiResponse<string>.Success("X√≥a phim th√†nh c√¥ng", "Success"));
         }
 
         [Authorize]
@@ -187,10 +187,10 @@ namespace MovieBooking.API.Controllers
             [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft,
             [FromQuery(Name = "MaPhim")] int maPhim = 0)
         {
-            if (string.IsNullOrWhiteSpace(tokenCybersoft)) return BadRequest(ApiResponse<string>.Error("Thi?u TokenCybersoft"));
+            if (string.IsNullOrWhiteSpace(tokenCybersoft)) return BadRequest(ApiResponse<string>.Error("Thi·∫øu TokenCybersoft"));
             var deleted = await _phimService.DeletePhimAsync(maPhim);
-            if (!deleted) return NotFound(ApiResponse<string>.Error("KhÙng t?m th?y phim", 404));
-            return Ok(ApiResponse<string>.Success("XÛa phim th‡nh cÙng", "Success"));
+            if (!deleted) return NotFound(ApiResponse<string>.Error("Kh√¥ng t√¨m th·∫•y phim", 404));
+            return Ok(ApiResponse<string>.Success("X√≥a phim th√†nh c√¥ng", "Success"));
         }
 
         [HttpGet("LayThongTinPhim")]
@@ -198,9 +198,9 @@ namespace MovieBooking.API.Controllers
             [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft,
             [FromQuery(Name = "MaPhim")] int maPhim = 0)
         {
-            if (string.IsNullOrWhiteSpace(tokenCybersoft)) return BadRequest(ApiResponse<string>.Error("Thi?u TokenCybersoft"));
+            if (string.IsNullOrWhiteSpace(tokenCybersoft)) return BadRequest(ApiResponse<string>.Error("Thi·∫øu TokenCybersoft"));
             var phim = await _phimService.GetPhimByIdAsync(maPhim);
-            if (phim == null) return NotFound(ApiResponse<string>.Error("KhÙng t?m th?y phim", 404));
+            if (phim == null) return NotFound(ApiResponse<string>.Error("Kh√¥ng t√¨m th·∫•y phim", 404));
             return Ok(ApiResponse<PhimDto>.Success(phim, "Success"));
         }
     }

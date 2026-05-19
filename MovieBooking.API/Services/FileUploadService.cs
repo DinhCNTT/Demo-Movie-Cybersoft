@@ -1,4 +1,4 @@
-using MovieBooking.API.Interfaces;
+ï»¿using MovieBooking.API.Interfaces;
 
 namespace MovieBooking.API.Services
 {
@@ -17,7 +17,7 @@ namespace MovieBooking.API.Services
         {
             if (file == null || file.Length == 0)
             {
-                throw new ArgumentException("File không h?p l?");
+                throw new ArgumentException("File khÃ´ng há»£p lá»‡");
             }
 
             // Validate file extension
@@ -26,13 +26,13 @@ namespace MovieBooking.API.Services
 
             if (!allowedExtensions.Contains(extension))
             {
-                throw new ArgumentException($"Ch? ch?p nh?n các file: {string.Join(", ", allowedExtensions)}");
+                throw new ArgumentException($"Ch? ch?p nh?n cÃ¡c file: {string.Join(", ", allowedExtensions)}");
             }
 
             // Validate file size (max 5MB)
             if (file.Length > 5 * 1024 * 1024)
             {
-                throw new ArgumentException("File không ðý?c vý?t quá 5MB");
+                throw new ArgumentException("File khÃ´ng Ä‘Æ°á»£c vÆ°á»£t quÃ¡ 5MB");
             }
 
             // Create upload directory if not exists

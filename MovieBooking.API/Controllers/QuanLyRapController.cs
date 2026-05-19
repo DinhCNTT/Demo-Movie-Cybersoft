@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using MovieBooking.API.DTOs.Common;
 using MovieBooking.API.DTOs.Rap;
 using MovieBooking.API.Interfaces;
@@ -22,7 +22,7 @@ namespace MovieBooking.API.Controllers
             [FromQuery] string maHeThongRap = "")
         {
             if (string.IsNullOrWhiteSpace(tokenCybersoft))
-                return BadRequest(ApiResponse<string>.Error("Thi?u TokenCybersoft"));
+                return BadRequest(ApiResponse<string>.Error("Thiếu TokenCybersoft"));
 
             var data = await _rapService.LayThongTinHeThongRapAsync(maHeThongRap);
             return Ok(ApiResponse<List<HeThongRapDto>>.Success(data, "Success"));
@@ -34,7 +34,7 @@ namespace MovieBooking.API.Controllers
             [FromQuery] string maHeThongRap = "")
         {
             if (string.IsNullOrWhiteSpace(tokenCybersoft))
-                return BadRequest(ApiResponse<string>.Error("Thi?u TokenCybersoft"));
+                return BadRequest(ApiResponse<string>.Error("Thiếu TokenCybersoft"));
 
             var data = await _rapService.LayThongTinCumRapTheoHeThongAsync(maHeThongRap);
             return Ok(ApiResponse<List<HeThongRapCumRapDto>>.Success(data, "Success"));
@@ -47,7 +47,7 @@ namespace MovieBooking.API.Controllers
             [FromQuery] string maNhom = "GP01")
         {
             if (string.IsNullOrWhiteSpace(tokenCybersoft))
-                return BadRequest(ApiResponse<string>.Error("Thi?u TokenCybersoft"));
+                return BadRequest(ApiResponse<string>.Error("Thiếu TokenCybersoft"));
 
             var data = await _rapService.LayThongTinLichChieuHeThongRapAsync(maHeThongRap, maNhom);
             return Ok(ApiResponse<List<HeThongRapLichChieuDto>>.Success(data, "Success"));
@@ -59,11 +59,11 @@ namespace MovieBooking.API.Controllers
             [FromQuery(Name = "MaPhim")] int maPhim = 0)
         {
             if (string.IsNullOrWhiteSpace(tokenCybersoft))
-                return BadRequest(ApiResponse<string>.Error("Thi?u TokenCybersoft"));
+                return BadRequest(ApiResponse<string>.Error("Thiếu TokenCybersoft"));
 
             var data = await _rapService.LayThongTinLichChieuPhimAsync(maPhim);
             if (data == null)
-                return NotFound(ApiResponse<string>.Error("Kh�ng t?m th?y phim", 404));
+                return NotFound(ApiResponse<string>.Error("Không tìm thấy phim", 404));
 
             return Ok(ApiResponse<ThongTinLichChieuPhimDto>.Success(data, "Success"));
         }

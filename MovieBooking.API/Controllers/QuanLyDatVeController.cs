@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MovieBooking.API.DTOs.Common;
 using MovieBooking.API.DTOs.DatVe;
@@ -26,10 +26,10 @@ namespace MovieBooking.API.Controllers
             [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft)
         {
             if (string.IsNullOrWhiteSpace(tokenCybersoft))
-                return BadRequest(ApiResponse<string>.Error("Thi?u TokenCybersoft"));
+                return BadRequest(ApiResponse<string>.Error("Thiếu TokenCybersoft"));
 
             if (DanhSachVe == null)
-                return BadRequest(ApiResponse<string>.Error("DanhSachVe kh�ng h?p l?"));
+                return BadRequest(ApiResponse<string>.Error("DanhSachVe không hợp lệ"));
 
             try
             {
@@ -38,10 +38,10 @@ namespace MovieBooking.API.Controllers
                               ?? string.Empty;
 
                 if (string.IsNullOrWhiteSpace(taiKhoan))
-                    return Unauthorized(ApiResponse<string>.Error("Kh�ng x�c th?c ��?c t�i kho?n", 401));
+                    return Unauthorized(ApiResponse<string>.Error("Không xác thực được tài khoản", 401));
 
                 await _datVeService.DatVeAsync(DanhSachVe, taiKhoan);
-                return Ok(ApiResponse<string>.Success("�?t v� th�nh c�ng", "Success"));
+                return Ok(ApiResponse<string>.Success("Đặt vé thành công", "Success"));
             }
             catch (Exception ex)
             {
@@ -55,11 +55,11 @@ namespace MovieBooking.API.Controllers
             [FromQuery(Name = "MaLichChieu")] int MaLichChieu = 0)
         {
             if (string.IsNullOrWhiteSpace(tokenCybersoft))
-                return BadRequest(ApiResponse<string>.Error("Thi?u TokenCybersoft"));
+                return BadRequest(ApiResponse<string>.Error("Thiếu TokenCybersoft"));
 
             var data = await _datVeService.LayDanhSachPhongVeAsync(MaLichChieu);
             if (data == null)
-                return NotFound(ApiResponse<string>.Error("Kh�ng t?m th?y l?ch chi?u", 404));
+                return NotFound(ApiResponse<string>.Error("Không tìm thấy lịch chiếu", 404));
 
             return Ok(ApiResponse<DanhSachPhongVeDto>.Success(data, "Success"));
         }
@@ -72,10 +72,10 @@ namespace MovieBooking.API.Controllers
             [FromHeader(Name = "TokenCybersoft")] string tokenCybersoft)
         {
             if (string.IsNullOrWhiteSpace(tokenCybersoft))
-                return BadRequest(ApiResponse<string>.Error("Thi?u TokenCybersoft"));
+                return BadRequest(ApiResponse<string>.Error("Thiếu TokenCybersoft"));
 
             if (lich == null)
-                return BadRequest(ApiResponse<string>.Error("D? li?u l?ch chi?u kh�ng h?p l?"));
+                return BadRequest(ApiResponse<string>.Error("Dữ liệu lịch chiếu không hợp lệ"));
 
             try
             {

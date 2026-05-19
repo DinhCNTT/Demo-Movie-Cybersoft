@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using MovieBooking.API.Data;
 using MovieBooking.API.DTOs.DatVe;
 using MovieBooking.API.Entities;
@@ -19,10 +19,10 @@ namespace MovieBooking.API.Services
         public async Task<bool> DatVeAsync(DanhSachVeDat request, string taiKhoan)
         {
             var lichChieu = await _context.LichChieus.FirstOrDefaultAsync(x => x.MaLichChieu == request.MaLichChieu);
-            if (lichChieu == null) throw new KeyNotFoundException("Kh�ng t?m th?y l?ch chi?u");
+            if (lichChieu == null) throw new KeyNotFoundException("Không tìm thấy lịch chiếu");
 
             if (request.DanhSachVe == null || request.DanhSachVe.Count == 0)
-                throw new InvalidOperationException("Danh s�ch v� r?ng");
+                throw new InvalidOperationException("Danh sách vé rỗng");
 
             await using var transaction = await _context.Database.BeginTransactionAsync();
 
@@ -34,7 +34,7 @@ namespace MovieBooking.API.Services
                 .ToListAsync();
 
             if (gheHopLe.Count != maGheList.Count)
-                throw new InvalidOperationException("C� gh? kh�ng thu?c r?p c?a l?ch chi?u");
+                throw new InvalidOperationException("Có ghế không thuộc rạp của lịch chiếu");
 
             var gheDaDat = await _context.Ves
                 .Where(v => v.MaLichChieu == request.MaLichChieu && maGheList.Contains(v.MaGhe))
@@ -42,7 +42,7 @@ namespace MovieBooking.API.Services
                 .ToListAsync();
 
             if (gheDaDat.Count > 0)
-                throw new InvalidOperationException("M?t s? gh? �? ��?c �?t");
+                throw new InvalidOperationException("Một số ghế đã được đặt");
 
             var veEntities = request.DanhSachVe.Select(v => new Ve
             {
@@ -114,10 +114,10 @@ namespace MovieBooking.API.Services
         public async Task<LichChieu> TaoLichChieuAsync(LichChieuInsert request)
         {
             var phimTonTai = await _context.Phims.AnyAsync(x => x.MaPhim == request.MaPhim);
-            if (!phimTonTai) throw new KeyNotFoundException("Kh�ng t?m th?y phim");
+            if (!phimTonTai) throw new KeyNotFoundException("Không tìm thấy phim");
 
             var rapTonTai = await _context.RapPhims.AnyAsync(x => x.MaRap == request.MaRap);
-            if (!rapTonTai) throw new KeyNotFoundException("Kh�ng t?m th?y r?p");
+            if (!rapTonTai) throw new KeyNotFoundException("Không tìm thấy rạp");
 
             var parsed = ParseDateTime(request.NgayChieuGioChieu);
 
@@ -154,7 +154,7 @@ namespace MovieBooking.API.Services
             if (DateTime.TryParse(input, out value))
                 return value;
 
-            throw new InvalidOperationException("NgayChieuGioChieu kh�ng ��ng �?nh d?ng");
+            throw new InvalidOperationException("NgayChieuGioChieu không đúng định dạng");
         }
     }
 }

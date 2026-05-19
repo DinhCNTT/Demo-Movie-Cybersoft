@@ -1,13 +1,13 @@
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MovieBooking.API.DTOs.Auth
 {
     public class LoginRequestDto
     {
-        [Required(ErrorMessage = "T�i kho?n kh�ng ��?c �? tr?ng")]
+        [Required(ErrorMessage = "Tài khoản không được để trống")]
         public string TaiKhoan { get; set; }
 
-        [Required(ErrorMessage = "M?t kh?u kh�ng ��?c �? tr?ng")]
+        [Required(ErrorMessage = "Mật khẩu không được để trống")]
         public string MatKhau { get; set; }
     }
 }

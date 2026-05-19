@@ -22,7 +22,7 @@ namespace MovieBooking.API.Migrations
                 values: new object[,]
                 {
                     { "KhachHang", "Khách Hàng" },
-                    { "QuanTri", "Qu?n Tr?" }
+                    { "QuanTri", "Quản Trị" }
                 });
 
             migrationBuilder.CreateIndex(
